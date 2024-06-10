@@ -28,12 +28,10 @@ async function getUser(id) {
     console.log(users_template)
     const user_results = document.querySelector(`#user-results`)
     
-    const users = await fetch(`http://localhost:8080/api/employees/${id}`)
+    const user = await fetch(`http://localhost:8080/api/employees/${id}`)
     .then((response) => response.json())
-    console.log(users)
+    console.log(user)
     console.log(id)
-    
-    for (let user of users) {
         const user_elems = users_template.content.cloneNode(true)
         const name = user_elems.querySelector(`h2`)
         name.innerHTML = user["fullName"]
@@ -46,9 +44,8 @@ async function getUser(id) {
     
         user_results.prepend(user_elems)
     
-    }
-
 }
+
 
 const allUsersButton = document.querySelector(`#allUsers`)
 console.log(allUsersButton)
