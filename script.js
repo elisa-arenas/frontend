@@ -49,11 +49,11 @@ async function getUser(id) {
 
 const allUsersButton = document.querySelector(`#allUsers`)
 console.log(allUsersButton)
-allUsersButton.addEventListener("click", populateUsers)
+allUsersButton.addEventListener("click", () => populateUsers())
 
 const searchButton = document.querySelector(`#oneUser`)
 const searchBar = document.querySelector(`#search-bar`)
 console.log(searchBar.value)
-searchButton.addEventListener("click", getUser(searchBar.value))
+searchButton.addEventListener("click", () => getUser(searchBar.value))
 
 
