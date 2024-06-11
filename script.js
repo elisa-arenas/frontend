@@ -70,14 +70,19 @@ function closeForm(){
     createUserForm.close();
 }
 
-window.handle_form = function (){
-    const message_form = document.querySelector (`#create-user-form`)
-    const data = new FormData (message_form)
+document.submitForm = function(event) {
+    event.preventDefault()
+    console.log(1)
+    const message_form = document.querySelector(`#create-user-form`)
+    const data = new FormData ()
+    for (let attribute of message_form) {
+        if (attribute.id == "createUser") continue //Ignore create button
+        console.log(attribute)
+        data.append(attribute.id, attribute.value)
+    }
     const message = Object.fromEntries (data.entries ())
     console.log ("Sending", message)
 }
-
-
 
 
 const allUsersButton = document.querySelector(`#allUsers`)
@@ -95,6 +100,3 @@ createUserButton.addEventListener("click", () => showForm())
 
 const closeFormButton = document.querySelector(`#close-button`)
 closeFormButton.addEventListener("click", () => closeForm())
-
-const createUserForm = document.querySelector(`#createUser`)
-createUserForm.addEventListener("click", () => window.handle_form())

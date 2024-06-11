@@ -40,7 +40,7 @@
                     <button id="close-button" rel="prev" aria-label="Close">
                     </button>
                 </header>
-                <form id="create-user-form" onsubmit="handle_form()">
+                <form id="create-user-form" onsubmit="submitForm(event)">
                     <label for="first-name">Enter First Name: </label>
                     <input id="first-name" required>
 
@@ -55,7 +55,7 @@
 
                     <label for="user-title">Enter Title: </label>
                     <input id="user-title" required>
-                    <input type="submit" value="Create" id="createUser"/>
+                    <input type="submit" value="Create" id="createUser">
                 </form>
             </article>
         </dialog>
