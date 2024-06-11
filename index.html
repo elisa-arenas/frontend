@@ -23,10 +23,10 @@
         <template id="result-template">
             <article>
                 <h2 id="fullName">John Smith</h2>
-                <slot id="email">Application Development Intern</slot>
-                <slot id="phone">3800 Citi Center, Tampa, Florida</slot>
-                <slot id="title">john.smith@citi.com</slot>
-                <slot id="department">PBWMT</slot>
+                <slot id="userEmail">Application Development Intern</slot>
+                <slot id="userPhone">3800 Citi Center, Tampa, Florida</slot>
+                <slot id="userTitle">john.smith@citi.com</slot>
+<!--                <slot id="department">PBWMT</slot>-->
             </article>
         </template>
     </section>
@@ -42,23 +42,23 @@
                     </button>
                 </header>
                 <form id="create-user-form" onsubmit="submitForm(event)">
-                    <label for="first-name">Enter First Name: </label>
-                    <input id="first-name" required>
+                    <label for="firstName">Enter First Name: </label>
+                    <input id="firstName" required>
 
-                    <label for="last-name">Enter Last Name: </label>
-                    <input id="last-name" required>
+                    <label for="lastName">Enter Last Name: </label>
+                    <input id="lastName" required>
 
-                    <label for="user-email">Enter Email: </label>
-                    <input id="user-email" required>
+                    <label for="email">Enter Email: </label>
+                    <input id="email" required>
 
-                    <label for="phone-number">Enter Phone Number: </label>
-                    <input id="phone-number" required>
+                    <label for="phone">Enter Phone Number: </label>
+                    <input id="phone" required>
 
-                    <label for="user-title">Enter Title: </label>
-                    <input id="user-title" required>
+                    <label for="title">Enter Title: </label>
+                    <input id="title" required>
 
-                    <label for="user-department">Enter Department: </label>
-                    <input id="user-department" required>
+                    <label for="department">Enter Department: </label>
+                    <input id="department" required>
 
                     <input type="submit" value="Create" id="createUser">
                 </form>

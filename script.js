@@ -75,13 +75,29 @@ document.submitForm = function(event) {
     console.log(1)
     const message_form = document.querySelector(`#create-user-form`)
     const data = new FormData ()
+
+    data.append("id", 0)
     for (let attribute of message_form) {
         if (attribute.id == "createUser") continue //Ignore create button
-        console.log(attribute)
         data.append(attribute.id, attribute.value)
+
+        if (attribute.id = "department"){
+            {
+                "id": 0,
+                "name": "string"
+            }
+        }
     }
+    console.log("Message form", message_form)
     const message = Object.fromEntries (data.entries ())
+    message["fullName"] = message["firstName"] + " " + message["lastName"]
     console.log ("Sending", message)
+
+    fetch (`http://localhost:8080/api/employees`, {
+        method: `POST`,
+        body: JSON.stringify (message),
+        headers: { 'Content-Type': 'application/json' }
+    })
 }
 
 
