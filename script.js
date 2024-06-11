@@ -78,11 +78,10 @@ document.submitForm = function(event) {
 
     for (let attribute of message_form.elements) {
         console.log(attribute);
-        if (attribute.id != "createUser") { // Check if the element has a name and is not the create button
+        if (attribute.id != "createUser") {
             if (attribute.id == "department") {
-                // Special handling for department name to nest it within the department object
                 message["department"] = {
-                    id: 0, // assuming department ID is fixed at 0 as per your example
+                    id: 0,
                     name: attribute.value
                 };
             } else {
