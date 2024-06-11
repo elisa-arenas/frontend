@@ -71,37 +71,38 @@ function closeForm(){
 }
 
 document.submitForm = function(event) {
-    event.preventDefault()
-    console.log(1)
-    const message_form = document.querySelector(`#create-user-form`)
-    const data = new FormData ()
+    event.preventDefault();
+    console.log(1);
+    const message_form = document.querySelector(`#create-user-form`);
+    const message = {};
 
-    data.append("id", 0)
-    for (let attribute of message_form) {
-        if (attribute.id == "createUser") continue //Ignore create button
-
-        if (attribute.id == "department"){
-            data.append("department", {
-                "id": 0,
-                "name": "string"
-            })
-        }
-        else {
-            data.append(attribute.id, attribute.value)
+    for (let attribute of message_form.elements) {
+        console.log(attribute);
+        if (attribute.id != "createUser") { // Check if the element has a name and is not the create button
+            if (attribute.id == "department") {
+                // Special handling for department name to nest it within the department object
+                message["department"] = {
+                    id: 0, // assuming department ID is fixed at 0 as per your example
+                    name: attribute.value
+                };
+            } else {
+                console.log("Attribute already exists");
+                message[attribute.id] = attribute.value;
+            }
         }
     }
-    console.log("Message form", message_form)
-    const message = Object.fromEntries (data.entries ())
-    console.log(message)
-    message["fullName"] = message["firstName"] + " " + message["lastName"]
-    console.log ("Sending", message)
-    console.log(JSON.stringify (message))
 
-    fetch (`http://localhost:8080/api/employees`, {
+    // Concatenate firstName and lastName to create fullName
+    message["fullName"] = message["firstName"] + " " + message["lastName"];
+
+    console.log("Sending", message);
+    console.log(JSON.stringify(message));
+
+    fetch(`http://localhost:8080/api/employees`, {
         method: `POST`,
-        body: JSON.stringify (message),
+        body: JSON.stringify(message),
         headers: { 'Content-Type': 'application/json' }
-    })
+    });
 }
 
 
