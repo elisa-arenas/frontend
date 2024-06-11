@@ -77,14 +77,15 @@ document.submitForm = function(event) {
     const data = new FormData ()
 
     data.append("id", 0)
+    let department = {
+        "id": 0,
+        "name": ""
+    }
     for (let attribute of message_form) {
         if (attribute.id == "createUser") continue //Ignore create button
 
         if (attribute.id == "department"){
-            data.append("department", {
-                "id": 0,
-                "name": "string"
-            })
+            department["name"] = attribute.value
         }
         else {
             data.append(attribute.id, attribute.value)
@@ -94,6 +95,7 @@ document.submitForm = function(event) {
     const message = Object.fromEntries (data.entries ())
     console.log(message)
     message["fullName"] = message["firstName"] + " " + message["lastName"]
+    message["department"] = department
     console.log ("Sending", message)
     console.log(JSON.stringify (message))
 
