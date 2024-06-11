@@ -60,6 +60,25 @@ async function getUser(id) {
     
 }
 
+function showForm(){
+    const createUserForm = document.querySelector(`#create-user-dialog`);
+    createUserForm.showModal();
+}
+
+function closeForm(){
+    const createUserForm = document.querySelector(`#create-user-dialog`);
+    createUserForm.close();
+}
+
+window.handle_form = function (){
+    const message_form = document.querySelector (`#create-user-form`)
+    const data = new FormData (message_form)
+    const message = Object.fromEntries (data.entries ())
+    console.log ("Sending", message)
+}
+
+
+
 
 const allUsersButton = document.querySelector(`#allUsers`)
 console.log(allUsersButton)
@@ -71,3 +90,11 @@ console.log(searchBar.value)
 searchButton.addEventListener("click", () => getUser(searchBar.value))
 
 
+const createUserButton = document.querySelector(`#create-user-button`)
+createUserButton.addEventListener("click", () => showForm())
+
+const closeFormButton = document.querySelector(`#close-button`)
+closeFormButton.addEventListener("click", () => closeForm())
+
+const createUserForm = document.querySelector(`#createUser`)
+createUserForm.addEventListener("click", () => window.handle_form())

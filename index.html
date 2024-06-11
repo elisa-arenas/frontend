@@ -17,8 +17,8 @@
             <p> OR</p>
         <input type="submit" value="List all users" id="allUsers"/>
         </article>
-        
     </section>
+
     <section id="user-results">
         <template id="result-template">
             <article>
@@ -28,7 +28,37 @@
                 <slot id="title">john.smith@citi.com</slot>
             </article>
         </template>
-        
+    </section>
+
+    <section id="create-user">
+        <article>
+            <button id="create-user-button">Create User</button>
+        </article>
+        <dialog id="create-user-dialog">
+            <article>
+                <header>
+                    <button id="close-button" rel="prev" aria-label="Close">
+                    </button>
+                </header>
+                <form id="create-user-form" onsubmit="handle_form()">
+                    <label for="first-name">Enter First Name: </label>
+                    <input id="first-name" required>
+
+                    <label for="last-name">Enter Last Name: </label>
+                    <input id="last-name" required>
+
+                    <label for="user-email">Enter Email: </label>
+                    <input id="user-email" required>
+
+                    <label for="phone-number">Enter Phone Number: </label>
+                    <input id="phone-number" required>
+
+                    <label for="user-title">Enter Title: </label>
+                    <input id="user-title" required>
+                    <input type="submit" value="Create" id="createUser"/>
+                </form>
+            </article>
+        </dialog>
     </section>
 </main>
 
