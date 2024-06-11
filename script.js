@@ -2,7 +2,14 @@ async function populateUsers() {
     const users_template = document.querySelector(`#result-template`)
     console.log(users_template)
     const user_results = document.querySelector(`#user-results`)
-    
+
+    const children = Array.from(user_results.children);
+    for (const user of children) {
+        if(user !== users_template) {
+            user_results.removeChild(user);
+        }
+    }
+
     const users = await fetch(`http://localhost:8080/api/employees`)
     .then((response) => response.json())
     console.log(users)
@@ -27,7 +34,14 @@ async function getUser(id) {
     const users_template = document.querySelector(`#result-template`)
     console.log(users_template)
     const user_results = document.querySelector(`#user-results`)
-    
+
+    const children = Array.from(user_results.children);
+    for (const user of children) {
+        if(user !== users_template) {
+            user_results.removeChild(user);
+        }
+    }
+
     const user = await fetch(`http://localhost:8080/api/employees/${id}`)
     .then((response) => response.json())
     console.log(user)
