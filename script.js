@@ -34,6 +34,7 @@ async function getUser(id) {
     const users_template = document.querySelector(`#result-template`)
     console.log(users_template)
     const user_results = document.querySelector(`#user-results`)
+    user_results.
 
     const children = Array.from(user_results.children);
     for (const user of children) {
@@ -122,3 +123,13 @@ createUserButton.addEventListener("click", () => showForm())
 
 const closeFormButton = document.querySelector(`#close-button`)
 closeFormButton.addEventListener("click", () => closeForm())
+
+const departments = fetch(`http://localhost:8080/api/departments`).then((response) => response.json())
+
+departmentDropdown = document.querySelector(`#departments`)
+
+for (let department in departments) {
+    let optionElement = document.createElement(`option`)
+    optionElement.innerHTML = department.name
+    departmentDropdown.append(optionElement)
+}
