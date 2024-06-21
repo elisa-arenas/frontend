@@ -16,16 +16,7 @@ async function populateUsers() {
     
     for (let user of users) {
         const user_elems = users_template.content.cloneNode(true)
-        const name = user_elems.querySelector(`h2`)
-        name.innerHTML = user["fullName"]
-        for (const key in user) {
-            const slot = user_elems.querySelector(`slot[id="${key}"]`)
-            if (slot) {
-                slot.replaceWith(user[key])
-            }
-        }
-    
-        user_results.prepend(user_elems)
+        populateUserFields(user_elems, user, user_results)
     
     }
 }
@@ -46,18 +37,34 @@ async function getUser(id) {
     .then((response) => response.json())
     console.log(user)
     console.log(id)
-        const user_elems = users_template.content.cloneNode(true)
-        const name = user_elems.querySelector(`h2`)
-        name.innerHTML = user["fullName"]
-        for (const key in user) {
-            const slot = user_elems.querySelector(`slot[id="${key}"]`)
-            if (slot) {
-                slot.replaceWith(user[key])
-            }
+
+    const user_elems = users_template.content.cloneNode(true)
+    populateUserFields(user_elems, user, user_results)
+}
+
+function populateUserFields(user_elems, user, user_results){
+    const name = user_elems.querySelector(`#fullName`)
+    name.innerHTML = user["fullName"]
+
+    const email = user_elems.querySelector(`#userEmail`)
+    email.innerHTML = user["email"]
+
+    const phone = user_elems.querySelector(`#userPhone`)
+    phone.innerHTML = user["phone"]
+
+    const title = user_elems.querySelector(`#userTitle`)
+    title.innerHTML = user["title"]
+
+    console.log(user)
+    for (const key in user) {
+        const slot = user_elems.querySelector(`slot[id="${key}"]`)
+        if (slot) {
+            slot.replaceWith(user[key])
         }
-    
-        user_results.prepend(user_elems)
-    
+    }
+
+    user_results.prepend(user_elems)
+
 }
 
 function showForm(){
@@ -104,6 +111,8 @@ document.submitForm = function(event) {
         body: JSON.stringify (message),
         headers: { 'Content-Type': 'application/json' }
     })
+
+    closeForm()
 }
 
 
