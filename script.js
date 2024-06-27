@@ -1,4 +1,4 @@
-async function populateUsers() {
+async function getUsers() {
     const users_template = document.querySelector(`#result-template`)
     console.log(users_template)
     const user_results = document.querySelector(`#user-results`)
@@ -16,7 +16,7 @@ async function populateUsers() {
     
     for (let user of users) {
         const user_elems = users_template.content.cloneNode(true)
-        populateUserFields(user_elems, user, user_results)
+        getUserFields(user_elems, user, user_results)
     
     }
 }
@@ -39,10 +39,10 @@ async function getUser(id) {
     console.log(id)
 
     const user_elems = users_template.content.cloneNode(true)
-    populateUserFields(user_elems, user, user_results)
+    getUserFields(user_elems, user, user_results)
 }
 
-function populateUserFields(user_elems, user, user_results){
+function getUserFields(user_elems, user, user_results){
     const name = user_elems.querySelector(`#fullName`)
     name.innerHTML = user["fullName"]
 
@@ -54,6 +54,15 @@ function populateUserFields(user_elems, user, user_results){
 
     const title = user_elems.querySelector(`#userTitle`)
     title.innerHTML = user["title"]
+
+    const button = user_elems.querySelector('#deleteUser')
+        button.addEventListener('click', (() => {
+            fetch (`http://localhost:8080/api/employees/${user['id']}`, {
+            method: `DELETE`,
+            body: JSON.stringify (user['id']),
+            headers: { 'Content-Type': 'application/json' }
+            })
+        }))
 
     console.log(user)
     for (const key in user) {
@@ -91,7 +100,7 @@ document.submitForm = function(event) {
     for (let attribute of message_form) {
         if (attribute.id == "createUser") continue //Ignore create button
 
-        if (attribute.id == "department"){
+        if (attribute.id == "departments"){
             department["name"] = attribute.value
         }
         else {
@@ -118,7 +127,7 @@ document.submitForm = function(event) {
 
 const allUsersButton = document.querySelector(`#allUsers`)
 console.log(allUsersButton)
-allUsersButton.addEventListener("click", () => populateUsers())
+allUsersButton.addEventListener("click", () => getUsers())
 
 const searchButton = document.querySelector(`#oneUser`)
 const searchBar = document.querySelector(`#search-bar`)
