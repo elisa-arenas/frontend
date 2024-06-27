@@ -47,13 +47,13 @@ function getUserFields(user_elems, user, user_results){
     name.innerHTML = user["fullName"]
 
     const email = user_elems.querySelector(`#userEmail`)
-    email.innerHTML = user["email"]
+    email.innerHTML = `Email: ${user["email"]}`
 
     const phone = user_elems.querySelector(`#userPhone`)
-    phone.innerHTML = user["phone"]
+    phone.innerHTML = `Phone: ${user["phone"]}`
 
     const title = user_elems.querySelector(`#userTitle`)
-    title.innerHTML = user["title"]
+    title.innerHTML = `Title: ${user["title"]}`
 
     const button = user_elems.querySelector('#deleteUser')
         button.addEventListener('click', (() => {
