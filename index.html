@@ -1,85 +1,110 @@
 <!DOCTYPE html>
 
-<head> 
-    <link rel="stylesheet" href="pico.min.css" type="text/css"/>
-    <style>
-        .user-card {
-            padding: 1em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 1em;
-        }
-    </style>
+<head>
+  <link rel="stylesheet" href="pico.min.css" type="text/css" />
+  <style>
+    .user-card {
+      padding: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 1em;
+    }
+  </style>
 </head>
 
-<title> Mock application
-</title>
-
+<title>Mock application</title>
 
 <main class="container" id="main-container">
-    <section id="user-search">
-        <article>
-            <label for="userid">Enter Account ID: </label>
-            <input id="search-bar" value="1">
-            <input type="submit" value="Search" id="oneUser"/>
-            <p> OR</p>
-        <input type="submit" value="List all users" id="allUsers"/>
-        </article>
-    </section>
+  <section id="user-search">
+    <article>
+      <label for="userid">Enter Account ID: </label>
+      <input id="search-bar" value="1" />
+      <input type="submit" value="Search" id="oneUser" />
+      <p>OR</p>
+      <input type="submit" value="List all users" id="allUsers" />
+    </article>
+  </section>
 
-    <section id="user-results">
-        <template id="result-template">
-            <article>
-                <h2 id="fullName">John Smith</h2>
-                <div id="userEmail">Email: john.smith@citi.com</div>
-                <div id="userPhone">Phone: 3800 Citi Center, Tampa, Florida</div>
-                <div id="userTitle">Job Title: Application Development Intern</div>
+  <section id="user-results">
+    <template id="result-template">
+      <article>
+        <h2 id="fullName"></h2>
+        <div id="userEmail"></div>
+        <div id="userPhone"></div>
+        <div id="userTitle"></div>
 
-                <!--                <slot id="userEmail">Application Development Intern</slot>-->
-<!--                <slot id="userPhone">3800 Citi Center, Tampa, Florida</slot>-->
-<!--                <slot id="userTitle">john.smith@citi.com</slot>-->
-                <button id="deleteUser" onclick ="deleteUser">Delete User</button>
-<!--                <slot id="department">PBWMT</slot>-->
-            </article>
-        </template>
-    </section>
+        <!--                <slot id="userEmail">Application Development Intern</slot>-->
+        <!--                <slot id="userPhone">3800 Citi Center, Tampa, Florida</slot>-->
+        <!--                <slot id="userTitle">john.smith@citi.com</slot>-->
+        <span>
+          <button id="deleteUser" onclick="deleteUser">Delete User</button>
+          <button id="edit-user-button" onclick="">Edit User</button>
+          <dialog id="edit-user-dialog">
+            <header>
+              <h2>Edit User</h2>
+              <button id="close-edit-button" onclick="closeEditDialog()">
+                Close
+              </button>
+            </header>
+            <form id="edit-user-form" onabort="submitEditForm(event)">
+              <label for="editFirstName">First Name:</label>
+              <input type="text" id="editFirstName" name="firstName" required />
 
-    <section id="create-user">
-        <article>
-            <button id="create-user-button">Create User</button>
-        </article>
-        <dialog id="create-user-dialog">
-            <article>
-                <header>
-                    <button id="close-button" rel="prev" aria-label="Close">
-                    </button>
-                </header>
-                <form id="create-user-form" onsubmit="submitForm(event)">
-                    <label for="firstName">Enter First Name: </label>
-                    <input id="firstName" required>
+              <label for="editLastName">Last Name:</label>
+              <input type="text" id="editLastName" name="lastName" required />
 
-                    <label for="lastName">Enter Last Name: </label>
-                    <input id="lastName" required>
+              <label for="editEmail">Email:</label>
+              <input type="email" id="editEmail" name="email" required />
 
-                    <label for="email">Enter Email: </label>
-                    <input id="email" required>
+              <label for="editPhone">Phone:</label>
+              <input type="tel" id="editPhone" name="phone" required />
 
-                    <label for="phone">Enter Phone Number: </label>
-                    <input id="phone" required>
+              <label for="editTitle">Title:</label>
+              <input type="text" id="editTitle" name="title" required />
 
-                    <label for="title">Enter Title: </label>
-                    <input id="title" required>
+              <input type="submit" value="Save Changes" id="editUser" />
+            </form>
+          </dialog>
+        </span>
+        <!--                <slot id="department">PBWMT</slot>-->
+      </article>
+    </template>
+  </section>
 
-                    <label for="departments">Enter Department: </label>
-                    <select id="departments" required>
-                    </select>
-                    <!-- <input id="department" required> -->
+  <section id="create-user">
+    <article>
+      <button id="create-user-button">Create User</button>
+    </article>
+    <dialog id="create-user-dialog">
+      <article>
+        <header>
+          <button id="close-button" rel="prev" aria-label="Close"></button>
+        </header>
+        <form id="create-user-form" onsubmit="submitCreateForm(event)">
+          <label for="firstName">Enter First Name: </label>
+          <input id="firstName" required />
 
-                    <input type="submit" value="Create" id="createUser">
-                </form>
-            </article>
-        </dialog>
-    </section>
+          <label for="lastName">Enter Last Name: </label>
+          <input id="lastName" required />
+
+          <label for="email">Enter Email: </label>
+          <input id="email" required />
+
+          <label for="phone">Enter Phone Number: </label>
+          <input id="phone" required />
+
+          <label for="title">Enter Title: </label>
+          <input id="title" required />
+
+          <label for="departments">Enter Department: </label>
+          <select id="departments" required></select>
+          <!-- <input id="department" required> -->
+
+          <input type="submit" value="Create" id="createUser" />
+        </form>
+      </article>
+    </dialog>
+  </section>
 </main>
 
 <script type="module" src="script.js"></script>
