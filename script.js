@@ -57,12 +57,13 @@ function getUserFields(user_elems, user, user_results) {
   title.innerHTML = `Title: ${user["title"]}`;
 
   const deleteButton = user_elems.querySelector("#deleteUser");
-  deleteButton.addEventListener("click", () => {
-    fetch(`http://localhost:8080/api/employees/${user["id"]}`, {
+  deleteButton.addEventListener("click", async () => {
+    await fetch(`http://localhost:8080/api/employees/${user["id"]}`, {
       method: `DELETE`,
       body: JSON.stringify(user["id"]),
       headers: { "Content-Type": "application/json" },
     });
+    getUsers();
   });
 
   console.log(user);
