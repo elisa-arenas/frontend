@@ -56,6 +56,9 @@ function getUserFields(user_elems, user, user_results) {
   const title = user_elems.querySelector(`#userTitle`);
   title.innerHTML = `Title: ${user["title"]}`;
 
+  const department = user_elems.querySelector("#userDepartment");
+  department.innerHTML = `Department: ${user["department"]["name"]}`;
+
   const deleteButton = user_elems.querySelector("#deleteUser");
   deleteButton.addEventListener("click", async () => {
     await fetch(`http://localhost:8080/api/employees/${user["id"]}`, {
@@ -75,6 +78,12 @@ function getUserFields(user_elems, user, user_results) {
   }
 
   user_results.prepend(user_elems);
+
+  const editUserButton = document.querySelector(`#edit-user-button`);
+  editUserButton.addEventListener("click", () => showEditUserForm());
+
+  const closeEditFormButton = document.querySelector(`#close-edit-button`);
+  closeEditFormButton.addEventListener("click", () => closeEditUserForm());
 }
 
 function showCreateUserForm() {
@@ -87,7 +96,7 @@ function closeCreateUserForm() {
   createUserForm.close();
 }
 
-document.submitCreateForm = function(event) {
+document.submitCreateForm = function (event) {
   event.preventDefault();
   console.log(1);
   const message_form = document.querySelector(`#create-user-form`);
@@ -122,10 +131,9 @@ document.submitCreateForm = function(event) {
   });
 
   closeCreateUserForm();
-}
+};
 
 const departmentDropdown = document.querySelector(`#departments`);
-
 
 console.log("Before department fetch");
 const departments = await fetch(`http://localhost:8080/api/departments`).then(
@@ -161,20 +169,14 @@ createUserButton.addEventListener("click", () => showCreateUserForm());
 const closeCreateFormButton = document.querySelector(`#close-button`);
 closeCreateFormButton.addEventListener("click", () => closeCreateUserForm());
 
-// function submitEditForm(event) {}
+function submitEditForm(event) {}
 
-// function showEditUserForm() {
-//   const editUserForm = document.querySelector(`#edit-user-dialog`);
-//   editUserForm.showModal();
-// }
+function showEditUserForm() {
+  const editUserForm = document.querySelector(`#edit-user-dialog`);
+  editUserForm.showModal();
+}
 
-// function closeEditUserForm() {
-//   const editUserForm = document.querySelector(`#edit-user-dialog`);
-//   editUserForm.close();
-// }
-
-// const editUserButton = document.querySelector(`#edit-user-button`);
-// editUserButton.addEventListener("click", () => showEditUserForm());
-
-// const closeEditFormButton = document.querySelector(`#close-edit-button`);
-// closeEditFormButton.addEventListener("click", () => closeEditUserForm());
+function closeEditUserForm() {
+  const editUserForm = document.querySelector(`#edit-user-dialog`);
+  editUserForm.close();
+}
