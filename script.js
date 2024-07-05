@@ -87,7 +87,7 @@ function closeCreateUserForm() {
   createUserForm.close();
 }
 
-function submitCreateForm(event) {
+document.submitCreateForm = function(event) {
   event.preventDefault();
   console.log(1);
   const message_form = document.querySelector(`#create-user-form`);
@@ -124,40 +124,8 @@ function submitCreateForm(event) {
   closeCreateUserForm();
 }
 
-function submitEditForm(event) {}
-
-function showEditUserForm() {
-  const editUserForm = document.querySelector(`#edit-user-dialog`);
-  editUserForm.showModal();
-}
-
-function closeEditUserForm() {
-  const editUserForm = document.querySelector(`#edit-user-dialog`);
-  editUserForm.close();
-}
-
-const allUsersButton = document.querySelector(`#allUsers`);
-console.log(allUsersButton);
-allUsersButton.addEventListener("click", () => getUsers());
-
-const searchButton = document.querySelector(`#oneUser`);
-const searchBar = document.querySelector(`#search-bar`);
-console.log(searchBar.value);
-searchButton.addEventListener("click", () => getUser(searchBar.value));
-
-const createUserButton = document.querySelector(`#create-user-button`);
-createUserButton.addEventListener("click", () => showCreateUserForm());
-
-const closeCreateFormButton = document.querySelector(`#close-button`);
-closeCreateFormButton.addEventListener("click", () => closeCreateUserForm());
-
-const editUserButton = document.querySelector(`#edit-user-button`);
-editUserButton.addEventListener("click", () => showEditUserForm());
-
-const closeEditFormButton = document.querySelector(`#close-edit-button`);
-closeEditFormButton.addEventListener("click", () => closeEditUserForm());
-
 const departmentDropdown = document.querySelector(`#departments`);
+
 
 console.log("Before department fetch");
 const departments = await fetch(`http://localhost:8080/api/departments`).then(
@@ -177,3 +145,36 @@ for (let i = 0; i < numDepartments; i++) {
 
 console.log(departmentDropdown);
 console.log(departments[0].name);
+
+const allUsersButton = document.querySelector(`#allUsers`);
+console.log(allUsersButton);
+allUsersButton.addEventListener("click", () => getUsers());
+
+const searchButton = document.querySelector(`#oneUser`);
+const searchBar = document.querySelector(`#search-bar`);
+console.log(searchBar.value);
+searchButton.addEventListener("click", () => getUser(searchBar.value));
+
+const createUserButton = document.querySelector(`#create-user-button`);
+createUserButton.addEventListener("click", () => showCreateUserForm());
+
+const closeCreateFormButton = document.querySelector(`#close-button`);
+closeCreateFormButton.addEventListener("click", () => closeCreateUserForm());
+
+// function submitEditForm(event) {}
+
+// function showEditUserForm() {
+//   const editUserForm = document.querySelector(`#edit-user-dialog`);
+//   editUserForm.showModal();
+// }
+
+// function closeEditUserForm() {
+//   const editUserForm = document.querySelector(`#edit-user-dialog`);
+//   editUserForm.close();
+// }
+
+// const editUserButton = document.querySelector(`#edit-user-button`);
+// editUserButton.addEventListener("click", () => showEditUserForm());
+
+// const closeEditFormButton = document.querySelector(`#close-edit-button`);
+// closeEditFormButton.addEventListener("click", () => closeEditUserForm());
