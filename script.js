@@ -59,6 +59,9 @@ function getUserFields(user_elems, user, user_results) {
   const department = user_elems.querySelector("#userDepartment");
   department.innerHTML = `Department: ${user["department"]["name"]}`;
 
+  const id = user_elems.querySelector(`#userId`);
+  id.innerHTML = `ID: ${user["id"]}`;
+
   const deleteButton = user_elems.querySelector("#deleteUser");
   deleteButton.addEventListener("click", async () => {
     await fetch(`http://localhost:8080/api/employees/${user["id"]}`, {
@@ -169,7 +172,9 @@ createUserButton.addEventListener("click", () => showCreateUserForm());
 const closeCreateFormButton = document.querySelector(`#close-button`);
 closeCreateFormButton.addEventListener("click", () => closeCreateUserForm());
 
-function submitEditForm(event) {}
+function submitEditForm(event) {
+
+}
 
 function showEditUserForm() {
   const editUserForm = document.querySelector(`#edit-user-dialog`);
