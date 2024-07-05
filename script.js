@@ -60,7 +60,7 @@ function getUserFields(user_elems, user, user_results) {
   department.innerHTML = `Department: ${user["department"]["name"]}`;
 
   const id = user_elems.querySelector(`#userId`);
-  id.innerHTML = `ID: ${user["id"]}`;
+  id.innerHTML = `${user["id"]}`;
 
   const deleteButton = user_elems.querySelector("#deleteUser");
   deleteButton.addEventListener("click", async () => {
@@ -172,7 +172,58 @@ createUserButton.addEventListener("click", () => showCreateUserForm());
 const closeCreateFormButton = document.querySelector(`#close-button`);
 closeCreateFormButton.addEventListener("click", () => closeCreateUserForm());
 
-function submitEditForm(event) {
+document.submitEditForm = function(event) {
+  event.preventDefault();
+  console.log(1);
+  const message_form = document.querySelector(`#edit-user-form`);
+  const data = new FormData();
+  let userID = 0;
+  const parentchildren = message_form.parentElement;
+  console.log(message_form);
+  console.log(message_form.parentElement);
+  // Chain of parents allows access to user ID
+  console.log(message_form.parentElement.parentElement.parentElement.parentElement)
+  for ( let attribute of message_form.parentElement.parentElement.parentElement.parentElement.children) {
+    if (attribute.id == "userIdDiv") {
+        for (let attrib of attribute.children) {
+            if (attrib.id == "userId") {
+                userID = attrib.value;
+                log(userID);
+            }
+        }
+
+    }
+  }
+
+//   data.append("id");
+//   let department = {
+//     id: 0,
+//     name: "",
+//   };
+//   for (let attribute of message_form) {
+//     if (attribute.id == "createUser") continue; //Ignore create button
+
+//     if (attribute.id == "departments") {
+//       department["name"] = attribute.value;
+//     } else {
+//       data.append(attribute.id, attribute.value);
+//     }
+//   }
+//   console.log("Message form", message_form);
+//   const message = Object.fromEntries(data.entries());
+//   console.log(message);
+//   message["fullName"] = message["firstName"] + " " + message["lastName"];
+//   message["department"] = department;
+//   console.log("Sending", message);
+//   console.log(JSON.stringify(message));
+
+//   fetch(`http://localhost:8080/api/employees`, {
+//     method: `PUT`,
+//     body: JSON.stringify(message),
+//     headers: { "Content-Type": "application/json" },
+//   });
+
+//   closeCreateUserForm();
 
 }
 
